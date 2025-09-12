@@ -1,8 +1,12 @@
-
+import { useState } from 'react';
 import arrowRight from '../../assets/arrowRight.png'
 import editBudget from '../../assets/editBudget.png'
+import AddIncome from '../addIncome/addIncome';
 
 function Home() {
+  
+  const [showIncome, setShowIncome] = useState(false)
+
   return (
     <div className="flex flex-col px-40">
       <div className="flex justify-between items-center py-7">
@@ -13,9 +17,10 @@ function Home() {
           </p>
         </div>
         <div className="flex gap-5">
-          <button className="bg-green-400 text-white rounded-full px-3.5 py-1.5 font-semibold cursor-pointer">
+          <button onClick={()=> setShowIncome(true)} className="bg-green-400 text-white rounded-full px-3.5 py-1.5 font-semibold cursor-pointer">
             Add Income
           </button>
+          {showIncome && <AddIncome onClose={()=>setShowIncome(false)}/>}
           <button className="bg-red-400 text-white rounded-full px-3.5 py-1.5 font-semibold cursor-pointer">
             Add Expense
           </button>
