@@ -2,10 +2,14 @@ import { useState } from 'react';
 import arrowRight from '../../assets/arrowRight.png'
 import editBudget from '../../assets/editBudget.png'
 import AddIncome from '../addIncome/addIncome';
+import AddExpense from '../addExpense/AddExpense';
+import RecentTransactions from '../RecentTransactions';
 
 function Home() {
   
   const [showIncome, setShowIncome] = useState(false)
+  const [showExpense, setShowExpense] = useState(false)
+  const [showTransactions, setShowTransactions] = useState(false)
 
   return (
     <div className="flex flex-col px-40">
@@ -17,13 +21,14 @@ function Home() {
           </p>
         </div>
         <div className="flex gap-5">
-          <button onClick={()=> setShowIncome(true)} className="bg-green-400 text-white rounded-full px-3.5 py-1.5 font-semibold cursor-pointer">
+          <button onClick={()=> setShowIncome(true)} className="bg-green-500 text-white rounded-full px-3.5 py-1.5 font-semibold cursor-pointer">
             Add Income
           </button>
           {showIncome && <AddIncome onClose={()=>setShowIncome(false)}/>}
-          <button className="bg-red-400 text-white rounded-full px-3.5 py-1.5 font-semibold cursor-pointer">
+          <button onClick={()=>setShowExpense(true)} className="bg-red-500 text-white rounded-full px-3.5 py-1.5 font-semibold cursor-pointer">
             Add Expense
           </button>
+          {showExpense && <AddExpense onClose={()=>setShowExpense(false)}/>}
         </div>
       </div>
       <div className="flex justify-between gap-5">
@@ -60,8 +65,9 @@ function Home() {
       </div>
 
       <div className="my-10">
-        <button className="flex border border-gray-300 rounded-2xl w-[100%] justify-center py-3 cursor-pointer gap-2 bg-white">See Recent Transactions <img src={arrowRight}/></button>
+        <button onClick={()=>setShowTransactions(true)} className="flex border border-gray-300 rounded-2xl w-[100%] justify-center py-3 cursor-pointer gap-2 bg-white">See All Transactions <img src={arrowRight}/></button>
       </div>
+      {showTransactions && <RecentTransactions onClose={()=>setShowTransactions(false)}/>}
     </div>
   );
 }
